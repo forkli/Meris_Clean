@@ -251,10 +251,42 @@ function initFaq() {
   });
 }
 
+/* ─── Burger Menu ─────────────────────────────────────────────── */
+function initBurger() {
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('nav-links');
+  if (!burger || !navLinks) return;
+
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    navLinks.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  // Linke tıklayınca menüyü kapat
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Dışarı tıklayınca kapat
+  navLinks.addEventListener('click', e => {
+    if (e.target === navLinks) {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+}
+
 /* ─── Init All ────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initReveal();
   initFaq();
   initCheckoutForm();
+  initBurger();
 });
