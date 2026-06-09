@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meris Clean 4'lü Temizlik Paketi — Yağçöz, WC Banyo, Silikonlu Temizleyici ve Sihirli Su. 500 TL." />
+  <title>4'lü Paket — Meris Clean</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* ── Paket sayfasına özel ── */
+    .pack-hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 760px;
+      margin: 48px auto 0;
+    }
+    .mini-product {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      padding: 18px 10px 14px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .mini-product:hover {
+      border-color: rgba(0,200,215,0.25);
+      transform: translateY(-3px);
+    }
+    .mini-product img {
+      height: 90px; width: auto; margin: 0 auto 10px;
+      display: block;
+    }
+    .mini-product h4 {
+      font-family: var(--font-display);
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--white); margin-bottom: 3px;
+    }
+    .mini-product p {
+      font-size: 0.7rem; color: var(--gray-400);
+    }
+    /* 4 sütun zorla */
+    .products-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 800px) {
+      .pack-hero-grid { grid-template-columns: repeat(2, 1fr); }
+      .products-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .pack-hero-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .saving-note {
+      font-size: 0.82rem; color: var(--gray-500);
+      margin-top: 6px;
+    }
+    .saving-note s { color: var(--gray-500); }
+    .saving-note strong { color: var(--cyan-400); }
+  </style>
+</head>
+<body>
+
+<div class="bg-canvas"></div>
+<div class="stars"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <a href="../" style="display:flex;align-items:center;gap:10px">
+      <img src="../assets/logo.jpeg" alt="Meris Clean" />
+      <span>MERİS <em>CLEAN</em></span>
+    </a>
+  </div>
+  <nav style="display:flex;gap:24px;align-items:center">
+    <a href="../yagcoz/" style="font-size:0.82rem;color:var(--gray-300);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-300)'">Yağçöz</a>
+    <a href="../wc-banyo/" style="font-size:0.82rem;color:var(--gray-300);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-300)'">WC Banyo</a>
+    <a href="../silikonlu/" style="font-size:0.82rem;color:var(--gray-300);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-300)'">Silikonlu</a>
+    <a href="../sihirli-su/" style="font-size:0.82rem;color:var(--gray-300);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-300)'">Sihirli Su</a>
+    <a href="./" style="font-size:0.82rem;color:var(--cyan-400);font-weight:600">Paket</a>
+  </nav>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">4 Ürün · 1 Paket</div>
+  <h1>Evin Her Köşesi<br><em>Tek Siparişle</em></h1>
+  <p class="hero-sub">
+    Mutfak, banyo, cam ve genel temizlik — dört farklı ihtiyaca dört ayrı çözüm. Doğal içerikli, Prolinex formülü.
+  </p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('order-section').scrollIntoView({behavior:'smooth'})">
+      Sipariş Ver — 500 TL
+    </button>
+    <button class="btn-ghost" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
+      İçeriğe Bak
+    </button>
+  </div>
+
+  <div class="pack-hero-grid reveal">
+    <div class="mini-product">
+      <img src="../assets/yagcoz.png" alt="Yağçöz" />
+      <h4>Yağçöz</h4>
+      <p>Mutfak & motor</p>
+    </div>
+    <div class="mini-product">
+      <img src="../assets/wc-banyo.png" alt="WC Banyo" />
+      <h4>WC Banyo</h4>
+      <p>Banyo & tuvalet</p>
+    </div>
+    <div class="mini-product">
+      <img src="../assets/silikonlu.png" alt="Silikonlu" />
+      <h4>Silikonlu</h4>
+      <p>Cam & mobilya</p>
+    </div>
+    <div class="mini-product">
+      <img src="../assets/sihirli-su.png" alt="Sihirli Su" />
+      <h4>Sihirli Su</h4>
+      <p>Çok amaçlı</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ÜRÜNLER DETAY -->
+<section class="section" id="products-section">
+  <p class="section-tag">İçerik</p>
+  <h2 class="section-title reveal">Pakette Ne Var?</h2>
+  <p class="section-sub reveal">Her ürün kendi alanında uzman. Dört şişe, dört farklı yüzey.</p>
+
+  <div class="products-grid-4 reveal">
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="../assets/yagcoz.png" alt="Yağçöz" />
+      </div>
+      <h3>Yağçöz</h3>
+      <ul class="product-card-features">
+        <li>Fırın, ocak, aspiratör</li>
+        <li>Motor ve araç yağı</li>
+        <li>Fosfat ve klor içermez</li>
+        <li>Biyolojik parçalanır</li>
+        <li>Ritha & D. limonen</li>
+      </ul>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="../assets/wc-banyo.png" alt="WC Banyo" />
+      </div>
+      <h3>WC Banyo</h3>
+      <ul class="product-card-features">
+        <li>Tuvalet ve banyo</li>
+        <li>Fayans, klozet, duşakabin</li>
+        <li>Paslanmaz yüzeyler</li>
+        <li>Meyve özü formülü</li>
+        <li>Cilde zarar vermez</li>
+      </ul>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="../assets/silikonlu.png" alt="Silikonlu" />
+      </div>
+      <h3>Silikonlu</h3>
+      <ul class="product-card-features">
+        <li>Cam, ayna, avize</li>
+        <li>Mobilya ve ankastre</li>
+        <li>Araç içi ve dışı</li>
+        <li>Antistatik koruma</li>
+        <li>İz bırakmaz</li>
+      </ul>
+    </div>
+
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="../assets/sihirli-su.png" alt="Sihirli Su" />
+      </div>
+      <h3>Sihirli Su</h3>
+      <ul class="product-card-features">
+        <li>Genel ev temizliği</li>
+        <li>Çamaşır ve beyaz eşya</li>
+        <li>Halı, koltuk, kilim</li>
+        <li>Araç detay temizliği</li>
+        <li>Yat ve marin</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- NEDEN -->
+<section class="section">
+  <p class="section-tag reveal">Prolinex</p>
+  <h2 class="section-title reveal">Doğadan Evinize</h2>
+  <div class="trust-grid reveal">
+    <div class="trust-card">
+      <div class="trust-icon">🌿</div>
+      <h4>Doğal İçerik</h4>
+      <p>Fosfat, klor ve amonyak içermez. Bitkisel özlerden üretilmiş, güvenli formula.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">🛡️</div>
+      <h4>Cilde Güvenli</h4>
+      <p>Hassas ciltler için uygundur. Eldivensiz kullanıma elverişli.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">♻️</div>
+      <h4>Çevre Dostu</h4>
+      <p>Biyolojik olarak doğada parçalanır. Sürdürülebilir üretim anlayışıyla hazırlanmış.</p>
+    </div>
+    <div class="trust-card">
+      <div class="trust-icon">⚡</div>
+      <h4>Kalıcı Temizlik</h4>
+      <p>Koruyucu katman bırakır. Temizlenen yüzey uzun süre temiz kalır.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- NASIL -->
+<section class="section">
+  <p class="section-tag reveal">Teslimat</p>
+  <h2 class="section-title reveal">Sipariş → Kapı</h2>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Sipariş</h4>
+      <p>Güvenli ödeme formuyla kredi kartınızla sipariş oluşturun.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Hazırlık</h4>
+      <p>Siparişiniz aynı gün hazırlanır ve kargoya verilir.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Teslimat</h4>
+      <p>1–3 iş günü içinde kapınızda. SMS ile kargo takibi.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SİPARİŞ -->
+<section class="section" id="order-section">
+  <p class="section-tag reveal">Sipariş</p>
+  <h2 class="section-title reveal">4'lü Mix Paket</h2>
+
+  <div class="shipping-banner" id="shipping-banner">
+    Kargo bu siparişe ücretsiz.
+  </div>
+
+  <div class="order-box reveal">
+    <div class="order-box-header">
+      <div class="saving-note"><s>600 TL</s> &nbsp;·&nbsp; <strong>500 TL</strong> paket fiyatı</div>
+      <div class="price-main">500 TL</div>
+      <div class="price-per">4 ürün · 1 set · kargo +60 TL</div>
+    </div>
+
+    <label class="qty-label">Adet</label>
+    <div class="qty-selector">
+      <button class="qty-btn" id="btn-minus">−</button>
+      <span class="qty-value" id="qty-value">1</span>
+      <span class="qty-unit" id="qty-unit">set</span>
+      <button class="qty-btn" id="btn-plus">+</button>
+    </div>
+
+    <div class="upsell-banner" id="upsell-banner">
+      2 set alın, kargo bedava.
+    </div>
+
+    <div class="price-summary">
+      <div class="price-row">
+        <span>Ürünler</span>
+        <span id="row-subtotal">500 TL</span>
+      </div>
+      <div class="price-row">
+        <span>Kargo</span>
+        <span id="row-shipping">60 TL</span>
+      </div>
+      <div class="price-row total">
+        <span>Toplam</span>
+        <span id="row-total" class="highlight">560 TL</span>
+      </div>
+    </div>
+
+    <button class="btn-buy" id="btn-buy">
+      Sipariş Ver — <span class="btn-total">560 TL</span>
+    </button>
+
+    <div class="secure-badges">
+      <span class="secure-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        256-bit SSL
+      </span>
+      <span class="secure-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Güvenli Ödeme
+      </span>
+      <span class="secure-badge">🔄 İade Garantisi</span>
+    </div>
+  </div>
+</section>
+
+<!-- ÖDEME FORMU -->
+<section class="checkout-section" id="checkout-section">
+  <div class="checkout-wrapper">
+    <div class="checkout-title">Ödeme</div>
+    <div class="checkout-order-summary" id="checkout-summary"></div>
+    <div class="natural-badge" style="margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px">🔒 Güvenli Ödeme <img src="../assets/iyzico/iyzico-white.png" alt="iyzico" style="height:20px;vertical-align:middle;opacity:0.85"></div>
+    <form id="checkout-form" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="buyer-name">Ad Soyad</label>
+        <input class="form-input" type="text" id="buyer-name" name="buyer-name" placeholder="Adınız Soyadınız" required autocomplete="name" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="buyer-email">E-posta</label>
+          <input class="form-input" type="email" id="buyer-email" name="buyer-email" placeholder="ornek@mail.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="buyer-phone">Telefon</label>
+          <input class="form-input" type="tel" id="buyer-phone" name="buyer-phone" placeholder="05xx xxx xx xx" required autocomplete="tel" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="buyer-address">Teslimat Adresi</label>
+        <input class="form-input" type="text" id="buyer-address" name="buyer-address" placeholder="Mahalle, Cadde, No, İlçe, İl" required autocomplete="street-address" />
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.08); margin:20px 0; padding-top:20px;">
+        <div class="form-label" style="margin-bottom:10px">Kart Bilgileri</div>
+        <div class="card-icons">
+          <span class="card-icon">VISA</span>
+          <span class="card-icon">MC</span>
+          <span class="card-icon">TROY</span>
+          <span class="card-icon">AMEX</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="card-name">Kart Üzerindeki İsim</label>
+        <input class="form-input" type="text" id="card-name" name="card-name" placeholder="AD SOYAD" required autocomplete="cc-name" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="card-number">Kart Numarası</label>
+        <input class="form-input" type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000" required autocomplete="cc-number" inputmode="numeric" maxlength="19" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="card-expiry">Son Kullanma</label>
+          <input class="form-input" type="text" id="card-expiry" name="card-expiry" placeholder="AA/YY" required autocomplete="cc-exp" maxlength="5" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="card-cvv">CVV</label>
+          <input class="form-input" type="text" id="card-cvv" name="card-cvv" placeholder="123" required autocomplete="cc-csc" maxlength="3" inputmode="numeric" />
+        </div>
+      </div>
+      <button type="submit" class="btn-buy btn-pay" style="margin-top:8px">
+        Güvenli Ödeme Yap
+      </button>
+      <div class="iyzico-notice">
+        <span>Ödeme altyapısı:</span>
+        <img src="../assets/iyzico/iyzico-white.png" alt="iyzico" style="height:22px;vertical-align:middle;margin:0 4px;opacity:0.9">
+        <span>tarafından güvence altındadır</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- SSS -->
+<section class="section">
+  <p class="section-tag reveal">SSS</p>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <div class="faq-q">Kargo kaç günde gelir? <span>+</span></div>
+      <div class="faq-a">Sipariş aynı gün kargoya verilir. 1–3 iş günü içinde teslim edilir.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Pakette tam olarak ne var? <span>+</span></div>
+      <div class="faq-a">Yağçöz, WC Banyo Temizleyici, Silikonlu Temizleyici ve Sihirli Su — her birinden 1 şişe, toplam 4 şişe.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">İade yapabilir miyim? <span>+</span></div>
+      <div class="faq-a">Teslimattan itibaren 14 gün içinde iade hakkınız bulunmaktadır.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Ödeme güvenli mi? <span>+</span></div>
+      <div class="faq-a">Tüm ödemeler İyzico altyapısıyla 256-bit SSL şifrelemeli olarak işlenir. Kart bilgileriniz sunucularımızda tutulmaz.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <a href="../"><img src="../assets/logo.jpeg" alt="Meris Clean" /></a>
+        <p>Prolinex ürünlerinin resmi distribütörü. Doğal, etkili temizlik çözümleri.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Ürünler</h5>
+        <ul>
+          <li><a href="../yagcoz/">Yağçöz</a></li>
+          <li><a href="../wc-banyo/">WC Banyo Temizleyici</a></li>
+          <li><a href="../silikonlu/">Silikonlu Temizleyici</a></li>
+          <li><a href="../sihirli-su/">Sihirli Su</a></li>
+          <li><a href="./">4'lü Mix Paket</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Bilgi</h5>
+        <ul>
+          <li>İade Politikası</li>
+          <li>Gizlilik Politikası</li>
+          <li>KVKK</li>
+          <li>İletişim</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Meris Clean.</span>
+      <span>merisclean.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/checkout.js"></script>
+<script>
+  window.orderData = { productName: "4'lü Mix Paket", productCode: 'PAKET-4LU' };
+  initOrderBox({ unitPrice: 500, isBundle: true, qtyStep: 1 });
+</script>
+</body>
+</html>
