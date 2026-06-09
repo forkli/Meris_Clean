@@ -4,18 +4,11 @@
 
 const SHIPPING_FEE = 60;
 const FREE_SHIPPING_THRESHOLD = 1000;
-const MIN_QTY = 4; // bireysel ürünler için
+const MIN_ORDER_AMOUNT = 500; // minimum sepet tutarı
 
-/**
- * Sipariş sayfasını başlat
- * @param {Object} config
- *   - unitPrice: number (birim fiyat)
- *   - isBundle: boolean (paket ise true, min qty 1)
- *   - qtyStep: number (artış adımı)
- */
 function initOrderBox(config) {
-  const { unitPrice, isBundle = false, qtyStep = isBundle ? 1 : 4 } = config;
-  const minQty = isBundle ? 1 : MIN_QTY;
+  const { unitPrice, isBundle = false, qtyStep = 1 } = config;
+  const minQty = 1;
 
   let qty = minQty;
 
@@ -26,27 +19,26 @@ function initOrderBox(config) {
   const rowSubtotal = document.getElementById('row-subtotal');
   const rowShipping = document.getElementById('row-shipping');
   const rowTotal    = document.getElementById('row-total');
-  const upsellEl    = document.getElementById('upsell-banner');
   const shippingEl  = document.getElementById('shipping-banner');
   const btnBuy      = document.getElementById('btn-buy');
   const summaryEl   = document.getElementById('checkout-summary');
+
+  // Upsell banner'ı gizle (artık kullanılmıyor)
+  const upsellEl = document.getElementById('upsell-banner');
+  if (upsellEl) upsellEl.style.display = 'none';
 
   function render() {
     const subtotal = qty * unitPrice;
     const shippingFree = subtotal >= FREE_SHIPPING_THRESHOLD;
     const shipping = shippingFree ? 0 : SHIPPING_FEE;
     const total = subtotal + shipping;
+    const canOrder = subtotal >= MIN_ORDER_AMOUNT;
 
     // Qty display
-    if (isBundle) {
-      qtyValueEl.textContent = qty;
-      qtyUnitEl.textContent  = qty === 1 ? 'set' : 'set';
-    } else {
-      qtyValueEl.textContent = qty;
-      qtyUnitEl.textContent  = 'adet';
-    }
+    qtyValueEl.textContent = qty;
+    qtyUnitEl.textContent  = isBundle ? 'set' : 'adet';
 
-    // Minus button — don't go below minimum
+    // Minus button
     btnMinus.disabled = (qty <= minQty);
 
     // Prices
@@ -56,26 +48,29 @@ function initOrderBox(config) {
     if (shippingFree) {
       rowShipping.innerHTML = '<span class="free">Ücretsiz 🎉</span>';
       shippingEl && shippingEl.classList.add('show');
-      upsellEl   && upsellEl.classList.remove('show');
     } else {
       rowShipping.textContent = SHIPPING_FEE + ' TL';
       shippingEl && shippingEl.classList.remove('show');
+    }
 
-      // Upsell: kaç TL kaldı?
-      if (upsellEl) {
-        const remaining = FREE_SHIPPING_THRESHOLD - subtotal;
-        upsellEl.innerHTML = `🚚 <strong>${remaining.toLocaleString('tr-TR')} TL</strong> daha ekle, kargo bedava!`;
-        upsellEl.classList.add('show');
+    // Buy button — pasif if altında 500 TL
+    if (btnBuy) {
+      const btnTotalEl = btnBuy.querySelector('.btn-total');
+      if (canOrder) {
+        btnBuy.disabled = false;
+        btnBuy.style.opacity = '1';
+        btnBuy.style.cursor = 'pointer';
+        btnTotalEl.textContent = total.toLocaleString('tr-TR') + ' TL öde';
+      } else {
+        btnBuy.disabled = true;
+        btnBuy.style.opacity = '0.45';
+        btnBuy.style.cursor = 'not-allowed';
+        const remaining = MIN_ORDER_AMOUNT - subtotal;
+        btnTotalEl.textContent = `min. ${MIN_ORDER_AMOUNT} TL (${remaining} TL daha ekle)`;
       }
     }
 
-    // Buy button label
-    if (btnBuy) {
-      btnBuy.querySelector('.btn-total').textContent =
-        total.toLocaleString('tr-TR') + ' TL öde';
-    }
-
-    // Checkout summary (visible when checkout opens)
+    // Checkout summary
     if (summaryEl) {
       summaryEl.innerHTML = `
         <div class="price-row">
@@ -93,19 +88,19 @@ function initOrderBox(config) {
   }
 
   btnMinus.addEventListener('click', () => {
-    if (qty - qtyStep >= minQty) { qty -= qtyStep; render(); }
+    if (qty > minQty) { qty -= qtyStep; render(); }
   });
 
   btnPlus.addEventListener('click', () => {
     qty += qtyStep; render();
   });
 
-  // İlk render
   render();
 
-  // "Hemen Sipariş Ver" → checkout açılır
   if (btnBuy) {
     btnBuy.addEventListener('click', () => {
+      const subtotal = qty * unitPrice;
+      if (subtotal < MIN_ORDER_AMOUNT) return;
       const cs = document.getElementById('checkout-section');
       if (cs) {
         cs.classList.add('show');

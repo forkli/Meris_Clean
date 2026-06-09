@@ -69,7 +69,7 @@
       <span class="qf-tag">♻️ Biyolojik</span>
     </div>
     <button class="btn-primary" onclick="document.getElementById('order-section').scrollIntoView({behavior:'smooth'})">
-      🛒 Sipariş Ver — 4 adet 600 TL
+      🛒 Sipariş Ver
     </button>
   </div>
 </div>
@@ -147,7 +147,7 @@
 <section class="section" id="order-section">
   <p class="section-tag reveal">Sipariş</p>
   <h2 class="section-title reveal">Yağçöz Satın Al</h2>
-  <p class="section-sub reveal">Üretici minimum 4'lü paketleme yapar. 4 adet 600 TL · 8 adet 1200 TL kargo bedava.</p>
+  <p class="section-sub reveal">Min. sipariş tutarı 500 TL · 1000 TL üzeri kargo bedava.</p>
 
   <div class="shipping-banner" id="shipping-banner">
     🎉 Harika! 1000 TL üzeri kargo ücretsiz!
@@ -156,10 +156,10 @@
   <div class="order-box reveal">
     <div class="order-box-header">
       <div class="price-main" style="color:#ff8a65">150 TL</div>
-      <div class="price-per">adet fiyatı · min. 4 adet sipariş</div>
+      <div class="price-per">adet fiyatı · min. 500 TL sipariş</div>
     </div>
 
-    <label class="qty-label">Adet Seçin (4'ün katları)</label>
+    <label class="qty-label">Adet Seçin</label>
     <div class="qty-selector">
       <button class="qty-btn" id="btn-minus">−</button>
       <span class="qty-value" id="qty-value">4</span>
@@ -306,7 +306,7 @@
 <script src="../js/checkout.js"></script>
 <script>
   window.orderData = { productName: 'Yağçöz', productCode: 'YAGCOZ-001' };
-  initOrderBox({ unitPrice: 150, isBundle: false, qtyStep: 4 });
+  initOrderBox({ unitPrice: 150, isBundle: false });
 </script>
 </body>
 </html>
