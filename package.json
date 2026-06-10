@@ -1,0 +1,7 @@
+{
+  "name": "meris-clean",
+  "version": "1.0.0",
+  "dependencies": {
+    "iyzipay": "^2.0.56"
+  }
+}
