@@ -150,6 +150,35 @@ function initCheckoutForm() {
 
 /* ─── Ödeme Gönder (İyzico) ───────────────────────────────────── */
 async function submitPayment(form) {
+  // Manuel doğrulama — novalidate olduğu için browser yapmaz
+  const requiredFields = [
+    { id: 'buyer-name',    label: 'Ad Soyad' },
+    { id: 'buyer-email',   label: 'E-posta' },
+    { id: 'buyer-phone',   label: 'Telefon' },
+    { id: 'buyer-address', label: 'Teslimat Adresi' },
+    { id: 'card-name',     label: 'Kart üzerindeki isim' },
+    { id: 'card-number',   label: 'Kart numarası' },
+    { id: 'card-expiry',   label: 'Son kullanma tarihi' },
+    { id: 'card-cvv',      label: 'CVV' },
+  ];
+
+  for (const field of requiredFields) {
+    const el = form[field.id] || document.getElementById(field.id);
+    if (!el || !el.value.trim()) {
+      showError(`Lütfen "${field.label}" alanını doldurun.`);
+      el && el.focus();
+      return;
+    }
+  }
+
+  // E-posta formatı kontrolü
+  const emailEl = form['buyer-email'] || document.getElementById('buyer-email');
+  if (emailEl && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+    showError('Geçerli bir e-posta adresi girin.');
+    emailEl.focus();
+    return;
+  }
+
   const btn = form.querySelector('.btn-pay');
   const originalText = btn.innerHTML;
 
@@ -157,6 +186,10 @@ async function submitPayment(form) {
   btn.disabled = true;
 
   const data = {
+    buyerName:      (form['buyer-name']    || document.getElementById('buyer-name'))?.value.trim(),
+    buyerEmail:     (form['buyer-email']   || document.getElementById('buyer-email'))?.value.trim(),
+    buyerPhone:     (form['buyer-phone']   || document.getElementById('buyer-phone'))?.value.trim(),
+    buyerAddress:   (form['buyer-address'] || document.getElementById('buyer-address'))?.value.trim(),
     cardHolderName: form['card-name'].value,
     cardNumber:     form['card-number'].value.replace(/\s/g, ''),
     expireMonth:    form['card-expiry'].value.split('/')[0],
