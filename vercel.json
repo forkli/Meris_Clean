@@ -5,12 +5,6 @@
       "maxDuration": 15
     }
   },
-  "headers": [
-    {
-      "source": "/server/:path*",
-      "headers": [{ "key": "x-robots-tag", "value": "noindex" }]
-    }
-  ],
   "rewrites": [
     { "source": "/server/:path*",            "destination": "/api/server" },
     { "source": "/api/:path*",               "destination": "/api/server" },
