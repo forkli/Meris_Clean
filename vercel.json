@@ -1,8 +1,13 @@
 {
   "functions": {
-    "api/**/*.js": {
+    "api/server.js": {
       "memory": 256,
       "maxDuration": 15
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/api/:path*",             "destination": "/api/server" },
+    { "source": "/panel-mc9x4k7z",         "destination": "/api/server" },
+    { "source": "/panel-mc9x4k7z/:path*",  "destination": "/api/server" }
+  ]
 }
