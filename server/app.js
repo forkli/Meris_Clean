@@ -12,6 +12,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+// server/ ve api/ klasörlerini statik olarak asla servis etme
+app.use('/server', (req, res) => res.status(404).end());
+app.use('/api/server', (req, res) => res.status(404).end());
 app.use(express.static(path.join(__dirname, '..')));
 app.use(cors({ origin: process.env.ALLOWED_ORIGIN || '*' }));
 
@@ -19,8 +22,8 @@ app.use(cors({ origin: process.env.ALLOWED_ORIGIN || '*' }));
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const supabase = createClient(
-  process.env.SUPABASE_URL      || 'https://oexlktaltdvqobefydqu.supabase.co',
-  process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9leGxrdGFsdGR2cW9iZWZ5ZHF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MTIzMjIsImV4cCI6MjA5NzI4ODMyMn0.VvR3YPHk3CnsFmwAGcpptcxErhB992GNKC0MrhZCUp0'
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
 );
 
 const iyzipay = new Iyzipay({

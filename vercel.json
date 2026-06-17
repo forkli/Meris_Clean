@@ -5,9 +5,16 @@
       "maxDuration": 15
     }
   },
+  "headers": [
+    {
+      "source": "/server/:path*",
+      "headers": [{ "key": "x-robots-tag", "value": "noindex" }]
+    }
+  ],
   "rewrites": [
-    { "source": "/api/:path*",             "destination": "/api/server" },
-    { "source": "/panel-mc9x4k7z",         "destination": "/api/server" },
-    { "source": "/panel-mc9x4k7z/:path*",  "destination": "/api/server" }
+    { "source": "/server/:path*",            "destination": "/api/server" },
+    { "source": "/api/:path*",               "destination": "/api/server" },
+    { "source": "/panel-mc9x4k7z",           "destination": "/api/server" },
+    { "source": "/panel-mc9x4k7z/:path*",    "destination": "/api/server" }
   ]
 }
