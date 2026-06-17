@@ -17,6 +17,9 @@ const cors      = require('cors');
 const Iyzipay   = require('iyzipay');
 const path      = require('path');
 const crypto    = require('crypto');
+const { Resend } = require('resend');
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 app.use(express.json());
@@ -139,6 +142,42 @@ app.post('/api/payment/initialize', async (req, res) => {
       }
 
       if (result.status === 'success') {
+        // Sipariş bildirim e-postası gönder
+        resend.emails.send({
+          from:    'Meris Clean <bildirim@merisclean.com>',
+          to:      'iremsaydam@merisgr.com',
+          subject: `Yeni Sipariş: ${orderId} — ${productName || 'Ürün'}`,
+          html: `
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f9f9f9;padding:24px;border-radius:8px">
+  <h2 style="color:#040e1c;margin-top:0">Yeni Sipariş Alındı 🎉</h2>
+  <p style="color:#555">Sipariş numarası: <strong>${orderId}</strong></p>
+  <hr style="border:none;border-top:1px solid #ddd;margin:16px 0">
+
+  <h3 style="color:#040e1c;margin-bottom:8px">Müşteri Bilgileri</h3>
+  <table style="width:100%;border-collapse:collapse">
+    <tr><td style="padding:6px 0;color:#888;width:140px">Ad Soyad</td><td style="padding:6px 0;font-weight:600">${buyerName || '—'}</td></tr>
+    <tr><td style="padding:6px 0;color:#888">E-posta</td><td style="padding:6px 0">${buyerEmail || '—'}</td></tr>
+    <tr><td style="padding:6px 0;color:#888">Telefon</td><td style="padding:6px 0">${buyerPhone || '—'}</td></tr>
+    <tr><td style="padding:6px 0;color:#888">Teslimat Adresi</td><td style="padding:6px 0">${buyerAddress || '—'}</td></tr>
+  </table>
+
+  <hr style="border:none;border-top:1px solid #ddd;margin:16px 0">
+
+  <h3 style="color:#040e1c;margin-bottom:8px">Sipariş Detayı</h3>
+  <table style="width:100%;border-collapse:collapse">
+    <tr><td style="padding:6px 0;color:#888;width:140px">Ürün</td><td style="padding:6px 0;font-weight:600">${productName || '—'}</td></tr>
+    <tr><td style="padding:6px 0;color:#888">Ürün Kodu</td><td style="padding:6px 0">${productCode || '—'}</td></tr>
+    <tr><td style="padding:6px 0;color:#888">Adet</td><td style="padding:6px 0">${quantity || '—'}</td></tr>
+    <tr><td style="padding:6px 0;color:#888">Birim Fiyat</td><td style="padding:6px 0">${unitPrice ? unitPrice + ' TL' : '—'}</td></tr>
+    <tr><td style="padding:6px 0;color:#888">Kargo</td><td style="padding:6px 0">${shippingPrice ? shippingPrice + ' TL' : '0 TL'}</td></tr>
+    <tr style="background:#f0f0f0"><td style="padding:8px 6px;color:#040e1c;font-weight:700">Toplam</td><td style="padding:8px 6px;font-weight:700;font-size:1.1em">${parsedTotal.toFixed(2)} TL</td></tr>
+  </table>
+
+  <hr style="border:none;border-top:1px solid #ddd;margin:16px 0">
+  <p style="color:#aaa;font-size:0.8em">İyzico Ödeme ID: ${result.paymentId}</p>
+</div>`,
+        }).catch(err => console.error('E-posta gönderilemedi:', err));
+
         return res.json({
           status:    'success',
           paymentId: result.paymentId,
