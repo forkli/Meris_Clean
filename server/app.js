@@ -476,6 +476,10 @@ app.post('/api/payment/3ds-callback', async (req, res) => {
   }
 });
 
-app.get('/api/health', (_, res) => res.json({ ok: true }));
+// Vercel cron her gün çağırır; Supabase free tier 7 gün istek gelmezse projeyi durduruyor
+app.get('/api/health', async (_, res) => {
+  const { error } = await supabase.from('orders').select('id', { head: true, count: 'exact' }).limit(1);
+  res.status(error ? 500 : 200).json({ ok: !error });
+});
 
 module.exports = app;
