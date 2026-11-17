@@ -1,17 +1,3 @@
 {
-  "functions": {
-    "api/server.js": {
-      "memory": 256,
-      "maxDuration": 15
-    }
-  },
-  "crons": [
-    { "path": "/api/health", "schedule": "0 6 * * *" }
-  ],
-  "rewrites": [
-    { "source": "/server/:path*",            "destination": "/api/server" },
-    { "source": "/api/:path*",               "destination": "/api/server" },
-    { "source": "/panel-mc9x4k7z",           "destination": "/api/server" },
-    { "source": "/panel-mc9x4k7z/:path*",    "destination": "/api/server" }
-  ]
+  "crons": [{ "path": "/api/health", "schedule": "0 6 * * *" }]
 }
