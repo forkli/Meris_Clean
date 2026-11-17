@@ -441,3 +441,9 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
 }
+
+/* Paket sayfası: ürün görseli kuralı şişe dizisine uygulanmasın */
+.pdp-main .bundle-row img { width: auto; height: 100%; padding: 0; }
+.pdp-main .bundle-row img:nth-child(even) { height: 92%; }
+.pdp-main--bundle { aspect-ratio: auto; padding-top: clamp(24px, 4vw, 56px); }
+.pdp-main .bundle-row { --bh: clamp(280px, 40vw, 460px); height: var(--bh); width: 100%; }

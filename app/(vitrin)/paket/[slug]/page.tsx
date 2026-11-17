@@ -28,8 +28,8 @@ export default async function PaketSayfasi({ params }: { params: Params }) {
     <div className="wrap" style={{ paddingBottom: 120 }}>
       <div className="pdp">
         <div className="pdp-media">
-          <div className="pdp-main" style={{ alignItems: "flex-end", gap: 0 }}>
-            <div className="bundle-row" style={{ height: "88%", justifyContent: "center", width: "100%" }}>
+          <div className="pdp-main pdp-main--bundle">
+            <div className="bundle-row">
               {items.map((i) => i.src && <Image key={i.variant_id} src={i.src} alt={i.variant.product.name} width={300} height={420} priority />)}
             </div>
           </div>
